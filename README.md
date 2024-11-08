@@ -1,2 +1,2 @@
-# lesson_plan_generator
+# Lesson Plan Generator
 Code for lesson plan generator
