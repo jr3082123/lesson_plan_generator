@@ -43,7 +43,7 @@ mdurl==0.1.2
 multidict==6.0.4
 mypy-extensions==1.0.0
 numexpr==2.8.5
-numpy==1.25.2
+numpy>=1.26.0,<2.0.0
 openai==1.54.3
 orjson==3.10.11
 packaging==23.2
