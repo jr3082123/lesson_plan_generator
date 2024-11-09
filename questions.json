@@ -1,0 +1,64 @@
+{
+    "questions": [
+        {
+            "id": 1,
+            "question": "What student demographics should I consider when creating a personalized lesson plan?"
+        },
+        {
+            "id": 2,
+            "question": "How can I effectively gather information about a student's specific needs, such as Dyslexia, Dyscalculia, Dysgraphia, Speeh Impairment, Emotional Disturbance, ASD, ADHD?"
+        },
+        {
+            "id": 3,
+            "question": "What learning goals should I prioritize for different age groups and grade levels?"
+        },
+        {
+            "id": 4,
+            "question": "How can I use predefined learning standards or benchmarks to guide my lesson planning?"
+        },
+        {
+            "id": 5,
+            "question": "What are effective ways to assess and indicate the priority levels of different learning goals?"
+        },
+        {
+            "id": 6,
+            "question": "What preferred teaching methods should I consider for diverse learning styles?"
+        },
+        {
+            "id": 7,
+            "question": "How can I select appropriate lesson plan templates based on the lesson type?"
+        },
+        {
+            "id": 8,
+            "question": "What is the best way to determine the optimal lesson length for my students?"
+        },
+        {
+            "id": 9,
+            "question": "How do I choose the right subject matter and specific topics for my lesson plans?"
+        },
+        {
+            "id": 10,
+            "question": "What online resources can I integrate into my lesson plans to enhance student engagement?"
+        },
+        {
+            "id": 11,
+            "question": "What types of activities and assessments should I include to measure student learning effectively?"
+        },
+        {
+            "id": 12,
+            "question": "How can I ensure that my lesson plans are adaptable for different learning environments?"
+        },
+        {
+            "id": 13,
+            "question": "What strategies can I use to personalize lessons based on individual student interests?"
+        },
+        {
+            "id": 14,
+            "question": "What considerations should I take into account for students with special needs when designing lessons?"
+        },
+        {
+            "id": 15,
+            "question": "How can I balance various teaching methods to cater to different learning preferences?"
+        }
+    ]
+}
