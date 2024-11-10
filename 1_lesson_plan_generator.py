@@ -1,6 +1,8 @@
 import streamlit as st
-from langchain.chat_models import AzureChatOpenAI  # Updated import
-from langchain import PromptTemplate
+#from langchain.chat_models import AzureChatOpenAI  # Updated import
+from langchain_community.chat_models import AzureChatOpenAI
+#from langchain import PromptTemplate
+from langchain_core.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from components.llm import llm
 import os
