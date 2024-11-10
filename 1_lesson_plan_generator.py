@@ -120,7 +120,7 @@ if st.session_state.currentkey:
     lesson_length = st.slider("Select Duration of the Lesson (in minutes)", 30, 120, 60)
 
     # Subject Matter
-    subject_area = st.selectbox("Choose Subject Area", ["Math", "Science", "Language Arts","Social Studies"])
+    subject_area = st.selectbox("Choose Subject Area", ["Math", "Science", "English Language Arts","Social Studies"])
 
     learning_standards = f"grade level {grade_level} and subject area {subject_area}"
     
