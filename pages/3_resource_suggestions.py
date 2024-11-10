@@ -61,13 +61,13 @@ if st.session_state.currentkey:
         
         if st.session_state.generate:
             with st.spinner("Generating resource suggestions..."):
-                #llm = AzureChatOpenAI(
-                #    openai_api_base=llm.AZURE_ENDPOINT,
-                #    openai_api_key=st.session_state.currentkey,  # Pass the key here
-                #    azure_deployment=llm.AZURE_OPENAI_DEPLOYMENT_NAME,
-                #    openai_api_version=llm.API_VERSION,
-                #    temperature=0.7
-                #)
+                llm = AzureChatOpenAI(
+                    openai_api_base=llm.AZURE_ENDPOINT,
+                    openai_api_key=st.session_state.currentkey,  # Pass the key here
+                    azure_deployment=llm.AZURE_OPENAI_DEPLOYMENT_NAME,
+                    openai_api_version=llm.API_VERSION,
+                    temperature=0.7
+                )
                 template = """
                 Based on the selected preference of {preference}, provide resource suggestions.
                 """
