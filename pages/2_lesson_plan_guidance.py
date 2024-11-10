@@ -33,15 +33,25 @@ if "generate" not in st.session_state:
 if 'currentkey' not in st.session_state:
     st.session_state.currentkey = ''
 
-# Retrieve Azure OpenAI configurations
-AZURE_OPENAI_API_KEY = st.session_state.currentkey
-AZURE_OPENAI_DEPLOYMENT_NAME = "gpt-35-turbo-16k"  # Set your Azure deployment name
-AZURE_ENDPOINT = "https://mylessonservice.openai.azure.com/"  # Set your Azure endpoint
-API_VERSION = "2024-08-01-preview"  # Use the correct API version
-
-
 questions = data['questions']
 question_list = []
+
+AZURE_OPENAI_ENDPOINT=''
+AZURE_OPENAI_DEPLOYMENT_NAME=''
+AZURE_OPENAI_API_VERSION=''
+
+
+# Try to get the Azure API key from secrets
+try:
+    st.session_state.currentkey = st.secrets["azure_openai"]["AZURE_OPENAI_API_KEY"]
+    AZURE_OPENAI_ENDPOINT = st.secrets["azure_openai"]["AZURE_OPENAI_ENDPOINT"]
+    AZURE_OPENAI_DEPLOYMENT_NAME = st.secrets["azure_openai"]["AZURE_OPENAI_DEPLOYMENT_NAME"]
+    AZURE_OPENAI_API_VERSION = st.secrets["azure_openai"]["AZURE_OPENAI_API_VERSION"]
+    st.session_state.validate = True
+
+except KeyError:
+    st.session_state.currentkey = None
+    st.session_state.validate = False
 
 
 def validate():
@@ -80,10 +90,10 @@ if st.session_state.currentkey:
         if st.session_state.generate:
             with st.spinner("Answering your question..."):
                 llm = AzureChatOpenAI(
-                    azure_endpoint=AZURE_ENDPOINT,
+                    azure_endpoint=AZURE_OPENAI_ENDPOINT,
                     api_key=st.session_state.currentkey,
                     azure_deployment=AZURE_OPENAI_DEPLOYMENT_NAME,
-                    api_version=API_VERSION,
+                    api_version=AZURE_OPENAI_API_VERSION,
                     temperature=0.5
                 )
                 template = """
