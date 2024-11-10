@@ -30,6 +30,22 @@ if "generate" not in st.session_state:
 if 'currentkey' not in st.session_state:
     st.session_state.currentkey = ''
 
+AZURE_OPENAI_ENDPOINT=''
+AZURE_OPENAI_DEPLOYMENT_NAME=''
+AZURE_OPENAI_API_VERSION=''
+
+# Try to get the Azure API key from secrets
+try:
+    st.session_state.currentkey = st.secrets["azure_openai"]["AZURE_OPENAI_API_KEY"]
+    AZURE_OPENAI_ENDPOINT = st.secrets["azure_openai"]["AZURE_OPENAI_ENDPOINT"]
+    AZURE_OPENAI_DEPLOYMENT_NAME = st.secrets["azure_openai"]["AZURE_OPENAI_DEPLOYMENT_NAME"]
+    AZURE_OPENAI_API_VERSION = st.secrets["azure_openai"]["AZURE_OPENAI_API_VERSION"]
+    st.session_state.validate = True
+
+except KeyError:
+    st.session_state.currentkey = None
+    st.session_state.validate = False
+
 # Validate API key
 def validate():
     try:
@@ -62,10 +78,10 @@ if st.session_state.currentkey:
         if st.session_state.generate:
             with st.spinner("Generating resource suggestions..."):
                 llm = AzureChatOpenAI(
-                    openai_api_base=llm.AZURE_ENDPOINT,
+                    openai_api_base=llm.AZURE_OPENAI_ENDPOINT,
                     openai_api_key=st.session_state.currentkey,  # Pass the key here
                     azure_deployment=llm.AZURE_OPENAI_DEPLOYMENT_NAME,
-                    openai_api_version=llm.API_VERSION,
+                    openai_api_version=llm.AZURE_OPENAI_API_VERSION,
                     temperature=0.7
                 )
                 template = """
