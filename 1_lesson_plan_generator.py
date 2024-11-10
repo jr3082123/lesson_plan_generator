@@ -64,23 +64,23 @@ def validate():
     except:
         st.sidebar.text('Azure OpenAI API key not valid')
 
-if not st.session_state.currentkey:
-    with st.sidebar.form('Enter Azure API key'):
-        st.text_input("Enter Azure OpenAI API key", key='input')
-        st.form_submit_button('Validate key', on_click=validate)
+#if not st.session_state.currentkey:
+#    with st.sidebar.form('Enter Azure API key'):
+#        st.text_input("Enter Azure OpenAI API key", key='input')
+#        st.form_submit_button('Validate key', on_click=validate)
 
-#with st.sidebar.form('Enter Azure API key'):
-#    st.text_input("Enter Azure OpenAI API key", key='input')
-#    st.form_submit_button('Validate key', on_click=validate)
+with st.sidebar.form('Enter Azure API key'):
+    st.text_input("Enter Azure OpenAI API key", key='input')
+    st.form_submit_button('Validate key', on_click=validate)
 
 if st.session_state.currentkey:
-    st.sidebar.text('Current Azure OpenAI API Key is valid')
+    side_text = st.sidebar.text(f'Current Azure OpenAI API Key is valid')
 
 if st.session_state.currentkey:
     
     # Student Demographics
     st.header("Student Demographics")
-    name = st.text_input("Name")
+    name = st.text_input("Group or Class Name")
     
     grades = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th"]
     age_group = st.selectbox("Select Age Group", ["6-10", "11-14", "15-18"])
@@ -120,7 +120,7 @@ if st.session_state.currentkey:
     lesson_length = st.slider("Select Duration of the Lesson (in minutes)", 30, 120, 60)
 
     # Subject Matter
-    subject_area = st.selectbox("Choose Subject Area", ["Math", "Science", "Language Arts"])
+    subject_area = st.selectbox("Choose Subject Area", ["Math", "Science", "Language Arts","Social Studies"])
 
     learning_standards = f"grade level {grade_level} and subject area {subject_area}"
     
@@ -139,10 +139,15 @@ if st.session_state.currentkey:
          else:
             specific_topics = st.multiselect("Select Specific Topics", ["Biology", "Chemistry", "Physics","Earth and Space Science","Environmental Science"])
         
-    elif subject_area == "Language Arts":
+    elif subject_area == "English Language Arts":
         specific_topics = st.multiselect("Select Specific Topics", ["Grammar", "Literature", "Writing"])
     else:
-        specific_topics = st.multiselect("Select Specific Topics", [])
+        if grade == 'elementary':
+            specific_topics = st.multiselect("Select Specific Topics", ["Community and Citizenship", "Basic Geography", "Historical Figures and Events","Cultural Awareness"])
+        elif grade == "middle":
+            specific_topics = st.multiselect("Select Specific Topics", ["World Geography", "Ancient Civilizations", "World History","Geography Skills","U.S. History","Civics and Government"])
+        else:
+            specific_topics = st.multiselect("Select Specific Topics", ["Advanced Placement (AP)","World History", "Geography", "U.S. History","Economics", "Government and Politics","Sociology and Psychology"])
 
     if st.button("Generate Program", on_click=generate_program):
         st.session_state.generate = True
