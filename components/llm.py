@@ -26,10 +26,10 @@ except:
 
     
 llm = AzureChatOpenAI(
-    azure_endpoint=AZURE_ENDPOINT,
+    azure_endpoint=AZURE_OPENAI_API_KEY,
     api_key=AZURE_OPENAI_API_KEY,
     azure_deployment=AZURE_OPENAI_DEPLOYMENT_NAME,
-    api_version=API_VERSION,
+    api_version=AZURE_OPENAI_API_VERSION,
     temperature=0,
     streaming=True
 )
