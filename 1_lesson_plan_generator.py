@@ -26,11 +26,6 @@ if "generate" not in st.session_state:
 if 'currentkey' not in st.session_state:
     st.session_state.currentkey = ''
 
-# Retrieve Azure OpenAI configurations
-AZURE_OPENAI_API_KEY = st.session_state.currentkey
-AZURE_OPENAI_DEPLOYMENT_NAME = "gpt-35-turbo-16k"  # Set your Azure deployment name
-AZURE_ENDPOINT = "https://mylessonservice.openai.azure.com/"  # Set your Azure endpoint
-API_VERSION = "2024-08-01-preview"  # Use the correct API version
 
 if 'validate' not in st.session_state:
     st.session_state.validate = False
