@@ -1,4 +1,5 @@
 import os
+import streamlit as st
 #from langchain_openai import AzureChatOpenAI
 #from langchain.chat_models import AzureChatOpenAI
 from langchain_community.chat_models import AzureChatOpenAI
@@ -7,13 +8,23 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-AZURE_OPENAI_API_KEY = os.environ.get('AZURE_OPENAI_API_KEY')
-AZURE_OPENAI_DEPLOYMENT_NAME = os.environ.get('AZURE_OPENAI_DEPLOYMENT_NAME')
-AZURE_ENDPOINT = os.environ.get('AZURE_ENDPOINT')
-API_VERSION = os.environ.get('API_VERSION_LLM')
+try:
+    AZURE_OPENAI_API_KEY = os.environ.get('AZURE_OPENAI_API_KEY')
+    AZURE_OPENAI_DEPLOYMENT_NAME = os.environ.get('AZURE_OPENAI_DEPLOYMENT_NAME')
+    AZURE_ENDPOINT = os.environ.get('AZURE_ENDPOINT')
+    API_VERSION = os.environ.get('API_VERSION_LLM')
+except:
+    try:
+        AZURE_OPENAI_API_KEY = st.secrets["azure_openai"]["AZURE_OPENAI_API_KEY"]
+        AZURE_OPENAI_ENDPOINT = st.secrets["azure_openai"]["AZURE_OPENAI_ENDPOINT"]
+        AZURE_OPENAI_DEPLOYMENT_NAME = st.secrets["azure_openai"]["AZURE_OPENAI_DEPLOYMENT_NAME"]
+        AZURE_OPENAI_API_VERSION = st.secrets["azure_openai"]["AZURE_OPENAI_API_VERSION"]
 
-print("AZURE_OPENAI_API_KEY:", os.getenv("AZURE_OPENAI_API_KEY"))
+    except KeyError:
+        st.session_state.currentkey = None
+        st.session_state.validate = False
 
+    
 llm = AzureChatOpenAI(
     azure_endpoint=AZURE_ENDPOINT,
     api_key=AZURE_OPENAI_API_KEY,
