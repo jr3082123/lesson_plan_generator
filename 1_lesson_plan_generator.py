@@ -37,7 +37,16 @@ if 'validate_count' not in st.session_state:
 try:
     st.session_state.currentkey = os.environ.get('AZURE_OPENAI_API_KEY')
 except:
-    pass
+    try:
+        st.session_state.currentkey = st.secrets["azure_openai"]["AZURE_OPENAI_API_KEY"]
+        AZURE_OPENAI_ENDPOINT = st.secrets["azure_openai"]["AZURE_OPENAI_ENDPOINT"]
+        AZURE_OPENAI_DEPLOYMENT_NAME = st.secrets["azure_openai"]["AZURE_OPENAI_DEPLOYMENT_NAME"]
+        AZURE_OPENAI_API_VERSION = st.secrets["azure_openai"]["AZURE_OPENAI_API_VERSION"]
+        st.session_state.validate = True
+    except KeyError:
+        st.session_state.currentkey = None
+        st.session_state.validate = False
+
 
 # Function to validate the Azure key
 def validate():
@@ -50,9 +59,14 @@ def validate():
     except:
         st.sidebar.text('Azure OpenAI API key not valid')
 
-with st.sidebar.form('Enter Azure API key'):
-    st.text_input("Enter Azure OpenAI API key", key='input')
-    st.form_submit_button('Validate key', on_click=validate)
+if not st.session_state.currentkey:
+    with st.sidebar.form('Enter Azure API key'):
+        st.text_input("Enter Azure OpenAI API key", key='input')
+        st.form_submit_button('Validate key', on_click=validate)
+
+#with st.sidebar.form('Enter Azure API key'):
+#    st.text_input("Enter Azure OpenAI API key", key='input')
+#    st.form_submit_button('Validate key', on_click=validate)
 
 if st.session_state.currentkey:
     st.sidebar.text('Current Azure OpenAI API Key is valid')
