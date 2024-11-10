@@ -35,19 +35,22 @@ if 'validate' not in st.session_state:
 if 'validate_count' not in st.session_state:
     st.session_state.validate_count = 0
 
+AZURE_OPENAI_ENDPOINT=''
+AZURE_OPENAI_DEPLOYMENT_NAME=''
+AZURE_OPENAI_API_VERSION=''
+
+
 # Try to get the Azure API key from secrets
 try:
-    st.session_state.currentkey = os.environ.get('AZURE_OPENAI_API_KEY')
-except:
-    try:
-        st.session_state.currentkey = st.secrets["azure_openai"]["AZURE_OPENAI_API_KEY"]
-        AZURE_OPENAI_ENDPOINT = st.secrets["azure_openai"]["AZURE_OPENAI_ENDPOINT"]
-        AZURE_OPENAI_DEPLOYMENT_NAME = st.secrets["azure_openai"]["AZURE_OPENAI_DEPLOYMENT_NAME"]
-        AZURE_OPENAI_API_VERSION = st.secrets["azure_openai"]["AZURE_OPENAI_API_VERSION"]
-        st.session_state.validate = True
-    except KeyError:
-        st.session_state.currentkey = None
-        st.session_state.validate = False
+    st.session_state.currentkey = st.secrets["azure_openai"]["AZURE_OPENAI_API_KEY"]
+    AZURE_OPENAI_ENDPOINT = st.secrets["azure_openai"]["AZURE_OPENAI_ENDPOINT"]
+    AZURE_OPENAI_DEPLOYMENT_NAME = st.secrets["azure_openai"]["AZURE_OPENAI_DEPLOYMENT_NAME"]
+    AZURE_OPENAI_API_VERSION = st.secrets["azure_openai"]["AZURE_OPENAI_API_VERSION"]
+    st.session_state.validate = True
+
+except KeyError:
+    st.session_state.currentkey = None
+    st.session_state.validate = False
 
 
 # Function to validate the Azure key
